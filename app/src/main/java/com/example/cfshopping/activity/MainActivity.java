@@ -1,8 +1,10 @@
-package com.example.cfshopping;
+package com.example.cfshopping.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.cfshopping.R;
 
 public class MainActivity extends AppCompatActivity {
 
