@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">C&amp;F shopping</string>
+    <string name="onboarding_email">Email</string>
+    <string name="onboarding_password">Password</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="login_btn_title">Login</string>
 </resources>
