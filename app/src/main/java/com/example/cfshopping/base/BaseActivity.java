@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
-public abstract class BaseActivity <VB extends ViewBinding, VM extends BaseViewModel> extends AppCompatActivity {
+public abstract class BaseActivity <VB extends ViewBinding, VM extends BaseViewModel> extends AppCompatActivity implements  BaseNavigator {
 
     public  VB binding;
     public VM viewModel;
