@@ -1,7 +1,10 @@
 package com.example.cfshopping.di;
 
 
+import com.example.cfshopping.db.UserDao;
 import com.example.cfshopping.remote.MainApi;
+import com.example.cfshopping.repository.MainRepository;
+import com.example.cfshopping.rx.SchedulerProvider;
 import com.example.cfshopping.utils.PreferenceManager;
 
 import dagger.Module;
