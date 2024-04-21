@@ -3,7 +3,7 @@ package com.example.cfshopping.di;
 
 import com.example.cfshopping.db.UserDao;
 import com.example.cfshopping.remote.MainApi;
-import com.example.cfshopping.repository.MainRepository;
+import com.example.cfshopping.repository.LoginRepository;
 import com.example.cfshopping.rx.SchedulerProvider;
 import com.example.cfshopping.utils.PreferenceManager;
 
@@ -20,8 +20,8 @@ public class ViewModelModule {
 
     @Provides
     @ViewModelScoped
-    MainRepository provideOnboardingRepository(SchedulerProvider schedulerProvider, MainApi mainApi, PreferenceManager preferenceManager, UserDao userDao) {
-        return new MainRepository(schedulerProvider, mainApi, preferenceManager, userDao);
+    LoginRepository provideOnboardingRepository(SchedulerProvider schedulerProvider, MainApi mainApi, PreferenceManager preferenceManager, UserDao userDao) {
+        return new LoginRepository(schedulerProvider, mainApi, preferenceManager, userDao);
     }
 
 }
