@@ -1,6 +1,12 @@
 package com.example.cfshopping.activity;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cfshopping.base.BaseActivity;
 
@@ -16,6 +22,29 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     protected LoginViewModel getViewModel() {
-        return null;
+        return new ViewModelProvider(this).get(LoginViewModel.class);;
     }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel.setNavigator(this);
+
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                viewModel.login();
+            }
+        });
+
+        viewModel.onUserLoggedIn.observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                Toast.makeText(MainActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
