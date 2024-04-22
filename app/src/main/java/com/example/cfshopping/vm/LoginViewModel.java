@@ -13,20 +13,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 public class LoginViewModel extends BaseViewModel<LoginNavigator> {
-    private MainRepository mainRepository;
+    private LoginRepository loginRepository;
 
     public MutableLiveData<User> onUserLoggedIn = new MutableLiveData<>();
 
     @Inject
     public LoginViewModel(LoginRepository loginRepository) {
-        this.LoginRepository = loginRepository;
+        this.loginRepository = loginRepository;
     }
 
 
     public void login() {
         User user = new User("test@gmail.com", "12341234");
 
-        mainRepository.login(user, onUserLoggedIn, compositeDisposable, getNavigator());
+        loginRepository.login(user, onUserLoggedIn, compositeDisposable, getNavigator());
 
     }
 

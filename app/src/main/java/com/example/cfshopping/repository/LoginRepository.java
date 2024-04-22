@@ -15,6 +15,8 @@ import com.example.cfshopping.utils.PreferenceManager;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -34,10 +36,44 @@ public class LoginRepository extends BaseRepository {
     }
 
     public void login(User user, MutableLiveData<User> onLoggedIn, CompositeDisposable compositeDisposable, MainNavigator navigator) {
-        Single<User> call = mainApi.login(user)
+        Single<User> call = mainApi.login(user);
+        navigator.showLoadingBar();
+        call.subscribeOn(schedulerProvider.io()).observeOn(schedulerProvider.ui()).subscribe(new SingleObserver<User>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                compositeDisposable.add(d);
+            }
 
-}
+            @Override
+            public void onSuccess(@NonNull User user) {
+                onLoggedIn.setValue(user);
 
+                userDao.insertAll(user).subscribeOn(schedulerProvider.io()).observeOn(schedulerProvider.ui()).subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        compositeDisposable.add(d);
+                    }
 
+                    @Override
+                    public void onComplete() {
+                        Log.d("DB", "User is inserted");
+                        navigator.hideLoadingBar();
+                    }
 
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (navigator != null)
+                            navigator.hideLoadingBar();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                navigator.hideLoadingBar();
+            }
+        });
+
+    }
 }
