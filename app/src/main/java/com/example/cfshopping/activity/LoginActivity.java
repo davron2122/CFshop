@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.cfshopping.base.BaseActivity;
 
 import com.example.cfshopping.databinding.ActivityLoginBinding;
+import com.example.cfshopping.model.User;
 import com.example.cfshopping.navigator.LoginNavigator;
 import com.example.cfshopping.vm.LoginViewModel;
 
@@ -22,7 +23,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     protected LoginViewModel getViewModel() {
-        return new ViewModelProvider(this).get(LoginViewModel.class);;
+        return new ViewModelProvider(this).get(LoginViewModel.class);
     }
 
 
@@ -42,7 +43,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         viewModel.onUserLoggedIn.observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                Toast.makeText(MainActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
             }
         });
     }
