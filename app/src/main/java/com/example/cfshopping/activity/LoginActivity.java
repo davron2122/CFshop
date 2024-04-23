@@ -48,4 +48,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         });
     }
 
+    @Override
+    public void showLoadingBar() {
+
+    }
+
+    @Override
+    public void hideLoadingBar() {
+
+    }
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.cfshopping.base.BaseRepository;
 import com.example.cfshopping.db.UserDao;
 import com.example.cfshopping.model.User;
+import com.example.cfshopping.navigator.LoginNavigator;
 import com.example.cfshopping.remote.MainApi;
 import com.example.cfshopping.rx.SchedulerProvider;
 import com.example.cfshopping.utils.PreferenceManager;
@@ -35,7 +36,7 @@ public class LoginRepository extends BaseRepository {
         this.preferenceManager = preferenceManager;
     }
 
-    public void login(User user, MutableLiveData<User> onLoggedIn, CompositeDisposable compositeDisposable, MainNavigator navigator) {
+    public void login(User user, MutableLiveData<User> onLoggedIn, CompositeDisposable compositeDisposable, LoginNavigator navigator) {
         Single<User> call = mainApi.login(user);
         navigator.showLoadingBar();
         call.subscribeOn(schedulerProvider.io()).observeOn(schedulerProvider.ui()).subscribe(new SingleObserver<User>() {
